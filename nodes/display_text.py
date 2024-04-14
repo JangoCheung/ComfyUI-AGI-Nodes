@@ -8,7 +8,8 @@ class DisplayText:
   def INPUT_TYPES(cls):
     return {
       "required": {
-        "input_text": ("TEXT", )
+        "input_text": ("TEXT", ),
+        "format": (["JSON", "String", "Number"], { "default": "String" })
       },
       "optional": {
 
@@ -17,5 +18,10 @@ class DisplayText:
   
   RETURN_TYPES = ()
 
-  def execute(self, input_text):
-    return { "ui": { "ret": (input_text, ) } }
+  def execute(self, **args):
+    return {
+      "ui": {
+        "ret": (args.get("input_text"), ),
+        "format": (args.get("format"), )
+      }
+    }
